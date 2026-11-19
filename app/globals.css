@@ -3,24 +3,112 @@
 :root {
   --background: #000000;
   --foreground: #f5f5f5;
+  --archive-muted: rgb(245 245 245 / 55%);
+  --archive-muted-strong: rgb(245 245 245 / 72%);
+  --archive-muted-soft: rgb(245 245 245 / 45%);
+  --archive-border: rgb(245 245 245 / 20%);
+  --archive-divider: rgb(245 245 245 / 35%);
+  --archive-border-strong: rgb(245 245 245 / 45%);
+  --archive-inverse-muted: rgb(0 0 0 / 55%);
+  --archive-inverse-border: rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+
+:root[data-theme="yang"] {
+  --background: #f5f5f5;
+  --foreground: #000000;
+  --archive-muted: rgb(0 0 0 / 55%);
+  --archive-muted-strong: rgb(0 0 0 / 72%);
+  --archive-muted-soft: rgb(0 0 0 / 45%);
+  --archive-border: rgb(0 0 0 / 20%);
+  --archive-divider: rgb(0 0 0 / 35%);
+  --archive-border-strong: rgb(0 0 0 / 45%);
+  --archive-inverse-muted: rgb(245 245 245 / 55%);
+  --archive-inverse-border: rgb(245 245 245 / 25%);
+  color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-archive-muted: var(--archive-muted);
+  --color-archive-muted-strong: var(--archive-muted-strong);
+  --color-archive-muted-soft: var(--archive-muted-soft);
+  --color-archive-border: var(--archive-border);
+  --color-archive-divider: var(--archive-divider);
+  --color-archive-border-strong: var(--archive-border-strong);
+  --color-archive-inverse-muted: var(--archive-inverse-muted);
+  --color-archive-inverse-border: var(--archive-inverse-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #f5f5f5;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+html {
+  scroll-padding-top: 6rem;
+}
+
+.archive-masthead {
+  transition: background-color 200ms ease, backdrop-filter 200ms ease;
+}
+
+.archive-panel {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease;
+}
+
+.archive-panel:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+  border-color: var(--archive-inverse-border);
+}
+
+.archive-panel-muted {
+  transition: color 240ms ease;
+}
+
+.archive-panel:hover .archive-panel-muted {
+  color: var(--archive-inverse-muted);
+}
+
+.archive-panel-border {
+  transition: border-color 240ms ease;
+}
+
+.archive-panel:hover .archive-panel-border {
+  border-color: var(--archive-inverse-border);
+}
+
+.raven-mark {
+  transition: filter 240ms ease;
+}
+
+:root[data-theme="yang"] .raven-mark {
+  filter: invert(1);
+}
+
+.text-foreground,
+.text-background,
+.text-archive-muted,
+.text-archive-muted-strong,
+.text-archive-muted-soft {
+  transition: color 240ms ease, opacity 240ms ease;
+}
+
+.bg-background,
+.bg-foreground {
+  transition: background-color 240ms ease;
+}
+
+.border-archive-border,
+.border-archive-divider,
+.border-archive-border-strong {
+  transition: border-color 240ms ease;
 }

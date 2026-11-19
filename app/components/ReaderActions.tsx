@@ -25,21 +25,19 @@ function readArray<T>(key: string): T[] {
 }
 
 type ReaderActionsProps = {
-  archiveMode: boolean;
   archiveId: string;
   articleTitle: string;
 };
 
 export default function ReaderActions({
-  archiveMode,
   archiveId,
   articleTitle,
 }: ReaderActionsProps) {
   const shelfKey = "sadwrita-reader-shelf";
   const noteKey = `sadwrita-note-${archiveId}`;
   const marksKey = "sadwrita-book-of-marks";
-  const border = archiveMode ? "border-black/20" : "border-white/20";
-  const muted = archiveMode ? "text-black/55" : "text-white/55";
+  const border = "border-archive-border";
+  const muted = "text-archive-muted";
 
   const [saved, setSaved] = useState(false);
   const [note, setNote] = useState("");
@@ -149,16 +147,12 @@ export default function ReaderActions({
   };
 
   return (
-    <div className="mx-auto max-w-[700px]">
+    <div className="mx-auto max-w-[700px] lg:ml-auto lg:mr-0 lg:max-w-[840px]">
       {selectedText && (
         <button
           type="button"
           onClick={markSelectedPassage}
-          className={`fixed z-[60] -translate-x-1/2 px-4 py-2 text-[9px] tracking-[0.18em] uppercase ${
-            archiveMode
-              ? "bg-black text-[#f5f5f5]"
-              : "bg-[#f5f5f5] text-black"
-          }`}
+          className="fixed z-[60] -translate-x-1/2 bg-foreground px-4 py-2 text-[9px] tracking-[0.18em] text-background uppercase"
           style={{
             left: selectionPosition.left,
             top: Math.max(12, selectionPosition.top),
@@ -169,29 +163,33 @@ export default function ReaderActions({
         </button>
       )}
 
-      <section className={`border-t ${border} py-12 sm:py-16`}>
-        <RavenLogoLabel archiveMode={archiveMode} />
-        <button
-          type="button"
-          onClick={toggleShelf}
-          className="mt-7 text-left text-sm font-medium tracking-[0.22em] uppercase transition-opacity duration-200 hover:opacity-55 sm:text-base"
-        >
-          {saved ? "KEPT" : "KEEP THIS WRITING"}
-        </button>
+      <section className={`border-t ${border} py-14 sm:py-20`}>
+        <div className="flex items-center gap-3">
+          <RavenLogoLabel />
+          <button
+            type="button"
+            onClick={toggleShelf}
+            className="text-left text-[13px] font-medium tracking-[0.24em] uppercase transition-opacity duration-200 hover:opacity-55 sm:text-sm"
+          >
+            {saved ? "KEPT" : "KEEP THIS WRITING"}
+          </button>
+        </div>
       </section>
 
-      <section className={`border-t ${border} py-12 sm:py-16`}>
-        <RavenLogoLabel archiveMode={archiveMode} />
-        <button
-          type="button"
-          onClick={() => setNoteOpen((current) => !current)}
-          aria-expanded={noteOpen}
-          className="mt-7 text-left text-sm font-medium tracking-[0.22em] uppercase sm:text-base"
-        >
-          Add a Personal Note
-        </button>
+      <section className={`border-t ${border} py-14 sm:py-20`}>
+        <div className="flex items-center gap-3">
+          <RavenLogoLabel />
+          <button
+            type="button"
+            onClick={() => setNoteOpen((current) => !current)}
+            aria-expanded={noteOpen}
+            className="text-left text-[13px] font-medium tracking-[0.24em] uppercase sm:text-sm"
+          >
+            Add a Personal Note
+          </button>
+        </div>
         {noteOpen && (
-          <div className="mt-8">
+          <div className="mt-9">
             <textarea
               value={note}
               onChange={(event) => setNote(event.target.value)}
@@ -209,12 +207,14 @@ export default function ReaderActions({
         )}
       </section>
 
-      <section className={`border-t ${border} py-12 sm:py-16`}>
-        <RavenLogoLabel archiveMode={archiveMode} />
-        <h2 className="mt-7 text-sm font-medium tracking-[0.22em] uppercase sm:text-base">
-          Book of Marks
-        </h2>
-        <p className={`mt-5 max-w-xl font-serif text-[17px] leading-[1.65] ${muted}`}>
+      <section className={`border-t ${border} py-14 sm:py-20`}>
+        <div className="flex items-center gap-3">
+          <RavenLogoLabel />
+          <h2 className="text-[13px] font-medium tracking-[0.24em] uppercase sm:text-sm">
+            Book of Marks
+          </h2>
+        </div>
+        <p className={`mt-7 max-w-xl font-serif text-base leading-[1.75] ${muted}`}>
           Select a passage in the essay, then mark it to keep the excerpt in your Book of Marks.
         </p>
         <button
@@ -231,7 +231,7 @@ export default function ReaderActions({
             {marks.map((mark, index) => (
               <blockquote
                 key={`${mark.text}-${index}`}
-                className={`border-b ${border} py-7 font-serif text-[17px] leading-[1.65] italic`}
+                className={`border-b ${border} py-8 font-serif text-base leading-[1.75] italic`}
               >
                 “{mark.text}”
                 <footer className={`mt-5 flex flex-wrap items-center justify-between gap-4 text-[9px] not-italic tracking-[0.16em] uppercase ${muted}`}>
@@ -261,11 +261,11 @@ export default function ReaderActions({
   );
 }
 
-function RavenLogoLabel({ archiveMode }: { archiveMode: boolean }) {
+function RavenLogoLabel() {
   return (
     <span
       aria-hidden="true"
-      className={`inline-block text-sm ${archiveMode ? "text-black/55" : "text-white/55"}`}
+      className="inline-block text-sm text-archive-muted"
     >
       ✦
     </span>

@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
+import PersistentHeader from "./PersistentHeader";
 
 const filters = ["ALL", "ESSAYS", "PHILOSOPHY", "FRAGMENTS", "POETRY", "NOTES"];
 
@@ -89,10 +91,10 @@ export default function WorksCatalogue() {
   }, [activeFilter, query]);
 
   return (
-    <main className="min-h-svh bg-black text-[#f5f5f5]">
-      <header className="px-5 pt-8 sm:px-10 lg:px-12 lg:pt-12">
+    <main className="min-h-svh bg-background text-foreground transition-colors duration-300">
+      <PersistentHeader className="px-5 pt-8 sm:px-10 lg:px-12 lg:pt-12">
         <div className="mx-auto max-w-[1800px]">
-          <div className="flex items-center justify-between border-b border-white/35 pb-6">
+          <div className="flex items-center justify-between border-b border-archive-divider pb-6">
             <Link
               href="/"
               aria-label="Return to Sadwrita home"
@@ -100,21 +102,28 @@ export default function WorksCatalogue() {
             >
               SADWRITA
             </Link>
-            <span className="font-mono text-xs tracking-[0.24em] text-white/55">
-              01
-            </span>
+            <div className="flex items-center gap-8">
+              <span className="font-mono text-xs tracking-[0.24em] text-archive-muted">
+                01
+              </span>
+              <ThemeToggle />
+            </div>
           </div>
+        </div>
+      </PersistentHeader>
 
+      <header className="px-5 sm:px-10 lg:px-12">
+        <div className="mx-auto max-w-[1800px]">
           <div className="pt-16 pb-12 sm:pt-20 lg:pt-24 lg:pb-16">
             <h1 className="text-[21vw] leading-[0.78] font-bold tracking-[-0.085em] sm:text-[16vw] lg:text-[10rem] xl:text-[12rem]">
               WORKS
             </h1>
-            <p className="mt-10 max-w-2xl text-base leading-relaxed text-white/68 sm:text-xl lg:mt-14 lg:text-2xl">
+            <p className="mt-10 max-w-2xl text-base leading-relaxed text-archive-muted-strong sm:text-xl lg:mt-14 lg:text-2xl">
               The archive of essays, fragments, poetry, and philosophical inquiries.
             </p>
           </div>
 
-          <dl className="grid grid-cols-2 border-t border-white/35 md:grid-cols-4">
+          <dl className="grid grid-cols-2 border-t border-archive-divider md:grid-cols-4">
             {[
               ["148", "Archive Entries"],
               ["62", "Essays"],
@@ -123,12 +132,12 @@ export default function WorksCatalogue() {
             ].map(([value, label], index) => (
               <div
                 key={label}
-                className={`py-7 pr-4 md:pr-8 ${index > 0 ? "border-l border-white/35 pl-4 md:pl-8" : ""} ${index > 1 ? "border-t border-white/35 md:border-t-0" : ""}`}
+                className={`py-7 pr-4 md:pr-8 ${index > 0 ? "border-l border-archive-divider pl-4 md:pl-8" : ""} ${index > 1 ? "border-t border-archive-divider md:border-t-0" : ""}`}
               >
                 <dd className="text-5xl leading-none font-bold tracking-[-0.055em] sm:text-6xl lg:text-7xl">
                   {value}
                 </dd>
-                <dt className="mt-4 text-[9px] tracking-[0.22em] text-white/55 uppercase sm:text-[10px]">
+                <dt className="mt-4 text-[9px] tracking-[0.22em] text-archive-muted uppercase sm:text-[10px]">
                   {label}
                 </dt>
               </div>
@@ -139,7 +148,7 @@ export default function WorksCatalogue() {
 
       <section className="px-5 pt-14 pb-20 sm:px-10 lg:px-12 lg:pt-20">
         <div className="mx-auto max-w-[1800px]">
-          <div className="flex flex-col gap-8 border-b border-white/35 pb-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-8 border-b border-archive-divider pb-8 lg:flex-row lg:items-end lg:justify-between">
             <div role="group" aria-label="Filter works" className="flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-8">
               {filters.map((filter) => (
                 <button
@@ -148,8 +157,8 @@ export default function WorksCatalogue() {
                   onClick={() => setActiveFilter(filter)}
                   className={`border-b border-transparent pb-2 text-[10px] tracking-[0.2em] uppercase transition-opacity duration-200 sm:text-xs ${
                     activeFilter === filter
-                      ? "border-white text-white"
-                      : "text-white/50 hover:text-white"
+                      ? "border-foreground text-foreground"
+                      : "text-archive-muted hover:text-foreground"
                   }`}
                   aria-pressed={activeFilter === filter}
                 >
@@ -158,44 +167,44 @@ export default function WorksCatalogue() {
               ))}
             </div>
 
-            <label className="block w-full border-b border-white/55 lg:w-[300px]">
+            <label className="block w-full border-b border-archive-border-strong lg:w-[300px]">
               <span className="sr-only">Search the archive</span>
               <input
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search the Archive"
-                className="h-11 w-full bg-transparent text-sm text-[#f5f5f5] outline-none placeholder:text-white/45"
+                className="h-11 w-full bg-transparent text-sm text-foreground outline-none placeholder:text-archive-muted-soft"
               />
             </label>
           </div>
 
           {filteredWorks.length > 0 ? (
-            <div className="mt-10 grid grid-cols-1 border border-white/45 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 border border-archive-border-strong sm:grid-cols-2 lg:grid-cols-3">
               {filteredWorks.map((work) => (
                 <Link
                   key={work.archiveId}
                   href={`/works/${work.slug}`}
-                  className="group flex min-h-[390px] flex-col border-b border-white/45 px-7 py-8 transition-colors duration-200 hover:bg-[#f5f5f5] hover:text-black sm:min-h-[420px] sm:px-8 lg:min-h-[440px] lg:px-10 lg:py-10 [&:nth-child(odd)]:border-r [&:nth-child(odd)]:lg:border-r-0 lg:[&:nth-child(3n+1)]:border-r lg:[&:nth-child(3n+2)]:border-r"
+                  className="archive-panel group flex min-h-[390px] min-w-0 flex-col border-b border-archive-border-strong px-7 py-8 sm:min-h-[420px] sm:px-8 lg:min-h-[440px] lg:px-10 lg:py-10 [&:nth-child(odd)]:border-r [&:nth-child(odd)]:lg:border-r-0 lg:[&:nth-child(3n+1)]:border-r lg:[&:nth-child(3n+2)]:border-r"
                 >
-                  <p className="text-[10px] font-medium tracking-[0.22em] text-white/65 uppercase transition-colors duration-200 group-hover:text-black/55 sm:text-xs">
+                  <p className="archive-panel-muted min-w-0 break-words text-[10px] font-medium tracking-[0.22em] text-archive-muted-strong uppercase sm:text-xs">
                     {work.categoryLabel} — {work.archiveId}
                   </p>
-                  <h2 className="mt-8 max-w-[340px] text-3xl leading-[1.05] font-bold tracking-[-0.04em] sm:text-4xl">
+                  <h2 className="mt-8 min-w-0 max-w-[340px] break-words text-3xl leading-[1.05] font-bold tracking-[-0.04em] sm:text-4xl">
                     {work.title}
                   </h2>
-                  <p className="mt-8 font-serif text-[17px] leading-[1.55] text-white/72 transition-colors duration-200 group-hover:text-black/75 lg:text-lg">
+                  <p className="archive-panel-muted mt-8 min-w-0 break-words font-serif text-[17px] leading-[1.55] text-archive-muted-strong lg:text-lg">
                     {work.excerpt}
                   </p>
-                  <div className="mt-auto flex justify-between gap-4 border-t border-white/25 pt-5 text-[9px] tracking-[0.18em] text-white/55 uppercase transition-colors duration-200 group-hover:border-black/20 group-hover:text-black/55 sm:text-[10px]">
-                    <time>{work.date}</time>
-                    <span>{work.readingTime}</span>
+                  <div className="archive-panel-muted mt-auto flex min-w-0 flex-wrap justify-between gap-x-4 gap-y-2 border-t border-archive-border pt-5 text-[9px] tracking-[0.18em] text-archive-muted uppercase sm:text-[10px]">
+                    <time className="min-w-0">{work.date}</time>
+                    <span className="shrink-0">{work.readingTime}</span>
                   </div>
                 </Link>
               ))}
             </div>
           ) : (
-            <p className="mt-10 border-b border-white/35 pb-10 text-sm tracking-[0.12em] text-white/55 uppercase">
+            <p className="mt-10 border-b border-archive-divider pb-10 text-sm tracking-[0.12em] text-archive-muted uppercase">
               No archive entries found
             </p>
           )}

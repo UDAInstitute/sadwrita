@@ -27,7 +27,7 @@ export default function FeaturedWorks() {
     <section
       id="works"
       aria-labelledby="featured-works-heading"
-      className="bg-[#f5f5f5] px-5 py-16 text-black sm:px-10 lg:min-h-svh lg:px-12 lg:py-20"
+      className="bg-background px-5 py-16 text-foreground transition-colors duration-300 sm:px-10 lg:min-h-svh lg:px-12 lg:py-20"
     >
       <div className="mx-auto max-w-[1800px]">
         <header className="flex items-start justify-between">
@@ -41,19 +41,19 @@ export default function FeaturedWorks() {
 
           <a
             href="#archive"
-            className="mt-32 shrink-0 text-[10px] font-medium tracking-[0.28em] text-black/55 uppercase transition-opacity duration-200 hover:opacity-100 sm:mt-40 sm:text-xs lg:mt-44"
+            className="mt-32 shrink-0 text-[10px] font-medium tracking-[0.28em] text-archive-muted uppercase transition-opacity duration-200 hover:opacity-100 sm:mt-40 sm:text-xs lg:mt-44"
           >
             All Works <span className="ml-3" aria-hidden="true">→</span>
           </a>
         </header>
 
-        <div className="mt-14 grid grid-cols-1 border border-white/45 bg-black sm:mt-16 md:grid-cols-3 lg:mt-20">
+        <div className="mt-14 grid grid-cols-1 border border-archive-border-strong bg-background sm:mt-16 md:grid-cols-3 lg:mt-20">
           {works.map((work) => (
             <article
               key={work.archiveId}
-              className="group flex min-h-[390px] flex-col border-b border-white/45 bg-black px-7 py-8 text-[#f5f5f5] transition-colors duration-200 last:border-b-0 hover:bg-[#f5f5f5] hover:text-black md:border-r md:border-b-0 md:px-8 md:last:border-r-0 lg:min-h-[385px] lg:px-10 lg:py-10"
+              className="archive-panel group flex min-h-[390px] flex-col border-b border-archive-border-strong px-7 py-8 last:border-b-0 md:border-r md:border-b-0 md:px-8 md:last:border-r-0 lg:min-h-[385px] lg:px-10 lg:py-10"
             >
-              <p className="text-[10px] font-medium tracking-[0.28em] uppercase text-white/65 transition-colors duration-200 group-hover:text-black/55 sm:text-xs">
+              <p className="archive-panel-muted text-[10px] font-medium tracking-[0.28em] uppercase text-archive-muted sm:text-xs">
                 {work.category}
                 <span className="mx-3" aria-hidden="true">—</span>
                 {work.archiveId}
@@ -63,7 +63,7 @@ export default function FeaturedWorks() {
                 {work.title}
               </h3>
 
-              <p className="mt-auto pt-12 font-serif text-[17px] leading-[1.55] text-white/72 transition-colors duration-200 group-hover:text-black/75 lg:max-w-[330px] lg:text-lg">
+              <p className="archive-panel-muted mt-auto pt-12 font-serif text-[17px] leading-[1.55] text-archive-muted-strong lg:max-w-[330px] lg:text-lg">
                 {work.excerpt}
               </p>
             </article>

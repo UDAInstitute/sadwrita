@@ -12,7 +12,7 @@ export default function RavenLogo({ className = "" }: RavenLogoProps) {
       width={1254}
       height={1254}
       priority
-      className={className}
+      className={`raven-mark ${className}`}
     />
   );
 }
