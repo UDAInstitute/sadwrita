@@ -1,9 +1,57 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# SADWRITA PROJECT
 
-## This is NOT the Next.js you know
+This project is a digital literary archive and publishing imprint.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+DESIGN HIERARCHY
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+1. Lumia / Metro Modernism
+2. Literary Editorial Design
+3. Dark Academia Atmosphere
+4. Occult Symbolism
 
-<!-- END:nextjs-agent-rules -->
+DEFAULT THEME
+
+Nocturne
+
+CORE SECTIONS
+
+Works
+Books
+Archive
+Reader's Space
+Shop
+Manifesto
+About
+
+VISUAL RULES
+
+- Monochrome only
+- Typography-first
+- Large editorial headings
+- Black and white palette
+- Minimal animations
+
+AVOID
+
+- Startup aesthetics
+- SaaS dashboards
+- Influencer design
+- Bright colors
+- Marketing language
+
+BRAND
+
+The Raven is the official mark of SADWRITA.
+
+The Raven represents:
+
+- Memory
+- Observation
+- Inquiry
+- Literature
+
+The Raven is a witness, not a ruler.
+
+GOAL
+
+The website should feel like a permanent literary archive and publishing imprint.
