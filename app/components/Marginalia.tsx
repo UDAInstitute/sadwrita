@@ -35,21 +35,22 @@ export default function Marginalia({
     return (
       <aside
         aria-label="Marginalia"
-        className={`hidden h-fit self-start border-l pl-6 lg:sticky lg:top-[120px] lg:block ${border}`}
+        className={`hidden h-fit self-start border-l pl-8 lg:sticky lg:top-[120px] lg:block xl:pl-12 ${border}`}
       >
         <div className="pt-1">
-          <p className={`text-[9px] font-medium tracking-[0.3em] uppercase ${muted}`}>
+          <p className={`text-[10px] font-medium tracking-[0.28em] uppercase ${muted}`}>
             Marginalia
           </p>
-          <div className="mt-14 space-y-16">
+          <div className="mt-10 space-y-10">
             {notes.map((note) => (
-              <div key={note.text} className="max-w-[210px]">
+              <div key={note.text} className="max-w-[260px]">
                 <p
-                  className={`font-serif text-[14px] leading-[1.7] italic ${muted}`}
+                  aria-hidden="true"
+                  className={`mb-4 font-serif text-sm italic ${muted}`}
                 >
-                  <span aria-hidden="true" className="mr-1">
-                    ✦
-                  </span>
+                  ✦
+                </p>
+                <p className="font-serif text-[16px] leading-[1.7] italic xl:text-[18px]">
                   {note.text}
                 </p>
               </div>
@@ -69,7 +70,7 @@ export default function Marginalia({
         type="button"
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
-        className={`flex w-full items-center justify-between text-[9px] tracking-[0.24em] uppercase ${muted}`}
+        className={`flex min-h-11 w-full items-center justify-between text-[9px] tracking-[0.24em] uppercase ${muted}`}
       >
         <span>Marginalia</span>
         <span aria-hidden="true">{open ? "−" : "+"}</span>
@@ -82,10 +83,13 @@ export default function Marginalia({
               key={note.text}
               className={`border-b ${border} pb-7 last:border-b-0`}
             >
-              <p className="font-serif text-[13px] leading-[1.7] italic">
-                <span aria-hidden="true" className="mr-1">
-                  ✦
-                </span>
+              <p
+                aria-hidden="true"
+                className={`mb-3 font-serif text-xs italic ${muted}`}
+              >
+                ✦
+              </p>
+              <p className="font-serif text-[14px] leading-[1.65] italic">
                 {note.text}
               </p>
             </div>

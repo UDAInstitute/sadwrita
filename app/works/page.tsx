@@ -1,5 +1,7 @@
 import WorksCatalogue from "../components/WorksCatalogue";
+import { getWorks, toWorkSummary } from "../../lib/works";
 
 export default function WorksPage() {
-  return <WorksCatalogue />;
+  const works = getWorks().map(toWorkSummary);
+  return <WorksCatalogue works={works} />;
 }
