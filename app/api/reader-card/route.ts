@@ -4,10 +4,10 @@ const emailPattern = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 const maxRequestSize = 4096;
 
 type IssuedCardRow = {
-  name: string;
-  email: string;
+  reader_name: string;
+  reader_email: string;
   reader_id: string;
-  date_issued: string;
+  issued_at: string;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -17,11 +17,11 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function isIssuedCardRow(value: unknown): value is IssuedCardRow {
   return (
     isRecord(value) &&
-    typeof value.name === "string" &&
-    typeof value.email === "string" &&
+    typeof value.reader_name === "string" &&
+    typeof value.reader_email === "string" &&
     typeof value.reader_id === "string" &&
-    typeof value.date_issued === "string" &&
-    !Number.isNaN(Date.parse(value.date_issued))
+    typeof value.issued_at === "string" &&
+    !Number.isNaN(Date.parse(value.issued_at))
   );
 }
 
@@ -155,10 +155,10 @@ export async function POST(request: Request) {
   const card = rows[0];
   return jsonResponse(
     {
-      readerName: card.name,
-      readerEmail: card.email,
-      readerId: card.reader_id,
-      readerSince: card.date_issued,
+      readerName: card.reader_name,
+readerEmail: card.reader_email,
+readerId: card.reader_id,
+readerSince: card.issued_at,
     },
     200,
   );
